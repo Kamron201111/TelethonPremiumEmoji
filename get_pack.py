@@ -20,4 +20,4 @@ async def get_pack_emojis(pack_name):
 # Pack nomini kiriting (URL dagi nom)
 # Masalan: t.me/addemoji/HousePack → "HousePack"
 import asyncio
-asyncio.run(get_pack_emojis("PACK_NOMI_BU_YERGA"))
+asyncio.run(get_pack_emojis("CenterOfPacks"))
