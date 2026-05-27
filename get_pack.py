@@ -6,7 +6,7 @@ API_ID = 23651528
 API_HASH = 'ca42cf77a78ee409550aac24e179c87e'
 SESSION = 'my_session'
 
-# === SHU YERGA 10 TA PACK NOMINI YOZING ===
+# === SHU YERGA PACK NOMLARINI YOZING ===
 PACK_NAMES = [
     "tgiosicons",
     "DanatShopUz1",
@@ -17,11 +17,12 @@ PACK_NAMES = [
     "ApplicationEmoji",
     "TgPremiumIcon",
     "NXDAMA_by_fStikBot",
-    "TajalyanEmoji",
+    "IconsInTg",
 ]
 # ==========================================
 
 OUTPUT_FILE = "emoji_ids.txt"
+
 
 async def get_pack_emojis(client, pack_name):
     try:
@@ -35,21 +36,30 @@ async def get_pack_emojis(client, pack_name):
         print(f"[{pack_name}] - XATO: {e}")
         return []
 
+
 async def main():
     async with TelegramClient(SESSION, API_ID, API_HASH) as client:
         with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
             for pack_name in PACK_NAMES:
                 documents = await get_pack_emojis(client, pack_name)
-                
-                f.write(f"\n=== {pack_name} ({len(documents)} ta) ===\n")
-                
-                for sticker in documents:
-                    for attr in sticker.attributes:
-                        if hasattr(attr, 'alt'):
-                            f.write(f"{sticker.id}\n")
-                            print(f"  Emoji: {attr.alt} | ID: {sticker.id}")
 
-        print(f"\nBarcha ID lar '{OUTPUT_FILE}' fayliga yozildi!")
+                f.write(f"\n=== {pack_name} ({len(documents)} ta) ===\n")
+
+                for sticker in documents:
+                    emoji_char = ""
+                    for attr in sticker.attributes:
+                        # alt - bu emoji belgisi (ⓘ, 💎, ⭐ va h.k.)
+                        if hasattr(attr, 'alt'):
+                            emoji_char = attr.alt
+                            break
+
+                    # ID va emoji belgisini yonma-yon yozamiz
+                    line = f"{sticker.id} | {emoji_char}\n"
+                    f.write(line)
+                    print(f"  ID: {sticker.id}  Emoji: {emoji_char}")
+
+        print(f"\n✅ Barcha ID va emojilar '{OUTPUT_FILE}' fayliga yozildi!")
+
 
 import asyncio
 asyncio.run(main())
