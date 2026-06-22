@@ -8,9 +8,9 @@ SESSION = 'my_session'
 
 # === SHU YERGA PACK NOMLARINI YOZING ===
 PACK_NAMES = [
-    "tgiosicons",
-    "DanatShopUz1",
-    "Statusvideobytaraxd",
+    "pixstars",
+    "Reach_Emoji",
+    "techbybirdanimatedemoji",
     "CenterOfPacks66572647",
     "EmojiCatalogbot0060",
     "emojisbyisakovkhusniddin",
